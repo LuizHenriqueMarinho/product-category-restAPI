@@ -1,0 +1,110 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar class="filter" color="secondary">
+
+      <form [formGroup]="formGroupPesquisaProduct">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="pesquisar produto..." formControlName="name" autocomplete="off"/>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSearchProduct()">Pesquisar</button>
+        <button mat-raised-button type="button" color="secondary" (click)="limparPesquisaProduct()">Limpar</button>
+      </form>
+
+      <form [formGroup]="formGroupPesquisaCategory">
+        <mat-form-field class="full-width">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="name">
+            <mat-option *ngFor="let category of categories$ | async" [value]="category">{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="centraliza-botao" mat-raised-button color="primary" (click)="onSearchCategory()">Pesquisar</button>
+        <button class="centraliza-botao" mat-raised-button type="button" color="secondary" (click)="limparPesquisaCategory()">Limpar</button>
+      </form>
+
+      <div> </div>
+    </mat-toolbar>
+
+    <div *ngIf="products$ | async as products; else loading">
+      <table mat-table [dataSource]="products" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="add-button">
+              <p class="products">Produto</p>
+              <button class="products-button"(click)="onAdd()" mat-mini-fab color="accent" aria-label="Adicionar um curso">
+                <mat-icon >add</mat-icon>
+              </button>
+            </div>
+          </th>
+
+          <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+        </ng-container>
+
+        <!-- price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Preço </th>
+          <td mat-cell *matCellDef="let product"> R${{ product.price }} </td>
+        </ng-container>
+
+        <!-- category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="add-button">
+              <p class="products">Categoria</p>
+              <button (click)="onAddCategory()" mat-mini-fab color="accent" aria-label="Adicionar um curso">
+                <mat-icon >add category</mat-icon>
+              </button>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let product"> {{ product.category.name }} </td>
+        </ng-container>
+
+
+        <!-- add Column -->
+        <ng-container matColumnDef="actions">
+          <div>
+            <mat-header-cell class="buttons" *matHeaderCellDef> Ações
+              <!-- <button (click)="onAdd()" mat-mini-fab color="accent" aria-label="Adicionar um curso">
+                <mat-icon >add</mat-icon>
+              </button> -->
+            </mat-header-cell>
+          </div>
+
+          <div >
+            <mat-cell class="buttons" *matCellDef="let product">
+
+              <button (click)="onUpdate(product.id)" mat-icon-button color="" aria-label="Editar curso">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button (click)="onRemove(product.id)" mat-icon-button color="warn" aria-label="Remover curso"> <!--(click)="onRemove(pessoa.id)"-->
+                <mat-icon>delete</mat-icon>
+              </button>
+
+            </mat-cell>
+          </div>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <!-- <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container> -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>"
+    </ng-template>
+
+  </mat-card-content>
+</mat-card>

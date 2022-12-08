@@ -1,0 +1,61 @@
+table {
+  width: 100%;
+
+
+}
+
+.loading-spinner
+{
+  padding: 25px;
+  background-color: rgb(209, 208, 208);
+  display:flex;
+  align-items: center;
+  justify-content: center;;
+}
+
+.buttons
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+
+}
+
+.mat-toolbar
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.full-width
+{
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+.add-button
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items:flex-end;
+}
+
+.products
+{
+  text-align: center;
+  padding-top: 12px;
+}
+
+.filter
+{
+  padding-left: 2px;
+  display: flex;
+  flex-direction: row;
+}
+
+.centraliza-botao
+{
+  margin-bottom: 13px;
+}
