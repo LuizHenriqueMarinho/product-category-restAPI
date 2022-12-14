@@ -84,7 +84,7 @@ export class CategoryListComponent {
 
   onUpdate(id: number)
   {
-    this.router.navigate(['edit', id], {relativeTo: this.route})
+    this.router.navigate(['editCategories', id], {relativeTo: this.route})
   }
 
 

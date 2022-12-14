@@ -14,7 +14,7 @@
         <mat-form-field class="full-width">
           <mat-label>Categoria</mat-label>
           <mat-select formControlName="name">
-            <mat-option *ngFor="let category of categories$ | async" [value]="category">{{ category.name }}</mat-option>
+            <mat-option *ngFor="let category of cat" [value]="category">{{ category.name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <button class="centraliza-botao" mat-raised-button color="primary" (click)="onSearchCategory()">Pesquisar</button>
@@ -24,8 +24,8 @@
       <div> </div>
     </mat-toolbar>
 
-    <div *ngIf="products$ | async as products; else loading">
-      <table mat-table [dataSource]="products" class="mat-elevation-z8">
+    <div *ngIf="prod as prod; else loading">
+      <table mat-table [dataSource]="prod" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -77,11 +77,11 @@
           <div >
             <mat-cell class="buttons" *matCellDef="let product">
 
-              <button (click)="onUpdate(product.id)" mat-icon-button color="" aria-label="Editar curso">
+              <button (click)="onUpdate(product.id)" mat-icon-button color="" aria-label="Editar produto">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button (click)="onRemove(product.id)" mat-icon-button color="warn" aria-label="Remover curso"> <!--(click)="onRemove(pessoa.id)"-->
+              <button (click)="onRemove(product.id)" mat-icon-button color="warn" aria-label="Remover produto"> <!--(click)="onRemove(pessoa.id)"-->
                 <mat-icon>delete</mat-icon>
               </button>
 
@@ -106,5 +106,14 @@
       </div>"
     </ng-template>
 
+    <!--  -->
   </mat-card-content>
 </mat-card>
+
+<mat-paginator #paginator
+[length]="totalPages"
+[pageSize]="pageSize"
+[pageSizeOptions]="pageSizeOptions"
+aria-label="Select page"
+(page)="nextPage($event)">
+</mat-paginator>

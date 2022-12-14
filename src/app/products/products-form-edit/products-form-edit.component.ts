@@ -34,7 +34,7 @@ export class ProductsFormEditComponent {
               private serviceCategories: CategoriesService,
               private snackBar: MatSnackBar,
               private serviceProducts: ProductsService,
-              private route: ActivatedRoute //existem dois locations, tem que importar
+              private route: ActivatedRoute
   )
   {}
 

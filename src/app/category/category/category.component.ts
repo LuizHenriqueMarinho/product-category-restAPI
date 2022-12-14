@@ -68,5 +68,4 @@ export class CategoryComponent {
     this.snackBar.open("erro ao cadastrar categoria", "", {duration: 3000})
   }
 
-
 }

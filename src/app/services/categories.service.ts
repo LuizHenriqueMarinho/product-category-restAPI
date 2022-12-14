@@ -27,12 +27,25 @@ export class CategoriesService {
     return this.httpClient.post<Category>(`${this.API}/save`, record);
   }
 
+  update(id: number, record: Partial<Category>)
+  {
+    return this.httpClient.put<Category>(`${this.API}/update/${id}`, record)
+  }
+
+
   remove(id: number)
   {
     return this.httpClient.delete<Category>(`${this.API}/delete/${id}`)
   }
 
-  filter(category : string): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(`${this.API}/busca?name=${category}`);
+  getById(id: number)
+  {
+    return this.httpClient.get<Category>(`${this.API}/${id}`)
+  }
+
+
+  filter(name : String): Observable<any> {
+    //return this.httpClient.get<Category[]>(`${this.API}/busca?name=${category}`);
+    return this.httpClient.get(`${this.API}/busca?name=${name}`);
   }
 }

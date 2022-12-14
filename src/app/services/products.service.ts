@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Page } from '../products/model/page';
+import { UtilService } from './util.service';
+import { PageParams } from '../products/model/page-params';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +16,20 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  list()
-  {
-    return this.httpClient.get<Products[]>(this.API) //isso é um tipo Observable, versão melhorada do primisses
-    .pipe(   //permite manipular com rxjs
-      first(),
-      tap(products => console.log(products)) //recebe lista => faz o que quiser com ela
-    );
-  }
+  // list()
+  // {
+  //   return this.httpClient.get<Products[]>(this.API) //isso é um tipo Observable, versão melhorada do primisses
+  //   .pipe(   //permite manipular com rxjs
+  //     first(),
+  //     tap(products => console.log(products)) //recebe lista => faz o que quiser com ela
+  //   );
+  // }
 
-  listPage(page: number, size: number)
+  listPage(pageParams: PageParams) : Observable<Page<Products>>
   {
-    return this.httpClient.get<Products[]>(`${this.API}?page=${page}&size=${size}`)
+    let params = UtilService.pageParamsHttpParams(pageParams);
+    return this.httpClient.get<Page<Products>>(this.API, {params: params})
+    // return this.httpClient.get<Page<Products>>(`${this.API}?page=${page}&linesPerPage=${size}&direction=DESC`)
   }
 
   save(record: Partial<Products>) //aceita que o objeto esteja faltando atributos

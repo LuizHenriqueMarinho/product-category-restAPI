@@ -36,13 +36,13 @@
           </div>
 
           <div>
-            <mat-cell class="buttons" *matCellDef="let product">
+            <mat-cell class="buttons" *matCellDef="let category">
 
-              <button (click)="onUpdate(product.id)" mat-icon-button color="" aria-label="Editar curso">
+              <button (click)="onUpdate(category.id)" mat-icon-button color="" aria-label="Editar categoria">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button (click)="onRemove(product.id)" mat-icon-button color="warn" aria-label="Remover curso"> <!--(click)="onRemove(pessoa.id)"-->
+              <button (click)="onRemove(category.id)" mat-icon-button color="warn" aria-label="Remover categoria"> <!--(click)="onRemove(pessoa.id)"-->
                 <mat-icon>delete</mat-icon>
               </button>
 
